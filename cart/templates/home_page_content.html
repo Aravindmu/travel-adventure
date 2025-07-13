@@ -1,0 +1,171 @@
+{% load static %}
+
+<style>
+    .section-title {
+        font-size: 28px;
+        font-weight: 600;
+        color: #fff;
+        margin: 30px 0 15px;
+        padding-left: 20px;
+    }
+
+    .media-section {
+        background-color: #12001f;
+        padding: 40px 0;
+    }
+    .carousel-row {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 20px;
+    padding: 0 20px;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+}
+
+.carousel-row::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+
+    .carousel-row::-webkit-scrollbar-thumb {
+        background: #444;
+        border-radius: 10px;
+    }
+
+    .media-card {
+        min-width: 299px;
+        max-width: 299px;
+        background: #140124;
+        border-radius: 0px;
+        overflow: hidden;
+        color: #fff;
+        flex-shrink: 0;
+        transition: transform 0.3s;
+    }
+
+    .media-card:hover {
+        transform: scale(1.15);
+    }
+
+    .media-frame {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        background: #25094b;
+    }
+
+    .media-frame img,
+    .media-frame video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .media-info {
+        padding: 12px 14px;
+        
+    }
+
+    .media-info h4 {
+        font-size: 16px;
+        margin: 0px 0;
+        color: #ff2ad6;
+    }
+
+    .media-info p {
+        font-size: 14px;
+        color: #aaa;
+    }
+
+    .rating i {
+        color: #f5c518;
+        margin-right: 1px;
+    }
+    /* CSS: Add to your main stylesheet */
+.float {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background-color: #8000ca;
+  color: white;
+  font-size: 32px;
+  text-align: center;
+  line-height: 60px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  z-index: 999;
+}
+
+.fab:hover {
+  background-color: #0056b3;
+}
+
+</style>
+
+<div class="media-section">
+    <h2 class="section-title">🔥Trending List</h2>
+    <div class="carousel-row">
+        {% for product in featured_products %}
+        <div class="media-card">
+            <a href="{% url 'detail_product' product.id %}">
+                <div class="media-frame">
+                    {% if product.media_type == 'image' %}
+                        <img src="{{ product.media_file.url }}" alt="{{ product.title }}">
+                    {% elif product.media_type == 'video' %}
+                        <video autoplay muted loop playsinline>
+                            <source src="{{ product.media_file.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    {% endif %}
+                </div>
+            </a>
+            <div class="media-info">
+                <h4>{{ product.title }}</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i><i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>@{{ product.owner }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2 class="section-title"> ✨Latest Features</h2>
+    <div class="carousel-row">
+        {% for product in latest_products %}
+        <div class="media-card">
+            <a href="{% url 'detail_product' product.id %}" >
+                <div class="media-frame">
+                    {% if product.media_type == 'image' %}
+                        <img src="{{ product.media_file.url }}" alt="{{ product.title }}">
+                    {% elif product.media_type == 'video' %}
+                        <video autoplay muted loop playsinline>
+                            <source src="{{ product.media_file.url }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    {% endif %}
+                </div>
+            </a>
+            <div class="media-info">
+                <h4>{{ product.title }}</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i><i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i><i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>@{{ product.owner }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+<a href="{% url 'add_content'%}" class="float" title="New Post">+</a>
+
+    </form>
+</div>
