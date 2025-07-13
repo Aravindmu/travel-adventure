@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-kp=*dm_uem6ril7m=cmh*hv9uzxn)3bspw8&n2_c3gxfj13ky1
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'travel-adventure-9.onrender.com',
+    'travel-adventure-01.onrender.com',
 ]
 
 
